@@ -1,85 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
 /* Log In pagina */
-#loginPagina{
+#loginPagina {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to right, #4FACFE, #00F2FE);
+  background: rgb(28, 28, 28)
 }
-
-#loginPagina .wrapper{
-  max-width: 50%;
+#loginPagina .wrapper img{
+  width: 50%;
+  height: 1;
+  object-fit: cover;
+  margin: 0 auto;
+  display: block;
+}
+#loginPagina .wrapper {
+  max-width: 40%;
   width: 100%;
   padding: 25px;
-  background: transparent;
+  background: white;
   border-radius: 20px;
-  box-shadow: 0 10px 15px rgba(0,0,0,0.5);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
 }
-#loginPagina .wrapper h1{
-  font-size: 36px;
-  text-align: center;
-  color: #fff;
+#loginPagina .wrapper h1 {
+  font-size: 34px;
+  text-align: left;
+  color: black;
 }
-#loginPagina .wrapper .input-box{
+#loginPagina .wrapper .input-box {
   position: relative;
   width: 100%;
   height: 50px;
   margin: 30px 0;
 }
-#loginPagina .wrapper .input-box input{
+#loginPagina .wrapper .input-box input {
   width: 100%;
   height: 100%;
   background: transparent;
   outline: none;
-  border: 2px solid rgba(255,255,255,0.5);
+  border: 2px solid rgba(26, 26, 26, 0.5);
   border-radius: 20px;
   font-size: 16px;
-  color: #fff;
+  color: black;
   padding: 20px 45px 20px 20px;
 }
-#loginPagina .wrapper .input-box input::placeholder{
-  color: #fff;
+#loginPagina .wrapper .input-box input::placeholder {
+  color: black;
 }
 
-#loginPagina .wrapper .input-box i{
+#loginPagina .wrapper .input-box i {
   position: absolute;
   right: 20px;
   top: 50%;
-  color: #fff;
+  color: black;
   transform: translateY(-50%);
   font-size: 20px;
 }
 
-#loginPagina .wrapper .submit-btn{
+#loginPagina .wrapper .submit-btn {
   width: 100%;
-  background: #fff;
+  background: black;
   border: none;
   outline: none;
   height: 50px;
   border-radius: 25px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  color: #333;
+  color: white;
   font-weight: 600;
   font-size: 1.1rem;
+  margin-top: 40px;
+  margin-bottom: 40px;
 }
 
-#loginPagina .wrapper .submit-btn:hover{
-  background-color: #e4e4e4;
+#loginPagina .wrapper .submit-btn:hover {
+  background-color: #575656;
 }
 /* Login pagina */
 /* LaadAnimatie */
-.loading{
+.loading {
   display: none;
   align-items: center;
   justify-content: center;
@@ -87,7 +94,7 @@
   margin-top: 20px;
   color: #fff;
 }
-.spinner{
+.spinner {
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -96,64 +103,106 @@
   animation: spin 2s linear infinite;
 }
 
-@keyframes spin{
-  0%{
+@keyframes spin {
+  0% {
     transform: rotate(0deg);
   }
-  100%{
+  100% {
     transform: rotate(360deg);
   }
 }
 /* Laadanimatie */
 
 /* Navigation */
-  header{
-    display: flex;
-    width: 100%;
-    padding: 10px 20px;
-    justify-content: space-between;
-    align-items: center;
-    height: 10vh;
-  }
-  header img{
-    width: auto;
-    height: 100%;
-    object-fit: cover;
-    background-color: white;
-  }
-  nav ul{
-    display: flex; 
-    gap: 50px;
-    list-style-type: none;
-  }
+header {
+  display: flex;
+  width: 100%;
+  padding: 10px 20px;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+}
+header img {
+  min-width: 14%;
+  height: 100%;
+  object-fit: cover;
+  background-color: white;
+}
+nav ul {
+  display: flex;
+  gap: 50px;
+  list-style-type: none;
+}
 
-  li, a{
-    text-decoration: none;
-    color: black;
-    font-weight: 400;
-  }
+li,
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+}
 
-   a:hover{
-    text-decoration: underline;
-  }
-
-
+a:hover {
+  text-decoration: underline;
+}
 
 /* Navigation */
 
 /* Home pagina */
+#datacontainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  gap: 20px;
+  justify-content: center;
+  
+}
 
+#datacontainer figure{
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  padding: 5px;
+  border-radius: 20px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+#datacontainer figure h3, #datacontainer figure p{
+  text-align: center;
+}
+
+#datacontainer figure img , p{
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+}
+
+#datacontainer figure ul{
+  list-style-type: none;
+  text-align: left;
+}
+
+#datacontainer figure ul li{
+  margin: 10px 0;
+}
 /* Home pagina */
 
-
-
-body{
+body {
   min-height: 100vh;
 }
 
-footer{
+main {
   padding: 20px;
-  position: fixed;
+}
+
+main h2{
+  font-weight: 400;
+}
+
+footer {
+  padding: 20px;
+  position: relative;
   bottom: 0;
   width: 100%;
   background-color: black;

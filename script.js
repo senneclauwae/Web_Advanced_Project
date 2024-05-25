@@ -16,10 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
         loadingContainer.style.display = "block";
         setTimeout(() => {
           window.location.href = "index.html";
-          alert("Login successful");
         }, 1000);
       } else {
-        alert("Invalid credentials");
+        alert("Foute gegevens! Probeer opnieuw.");
+        document.getElementById("username").value = ""; 
+        document.getElementById("password").value = ""; 
         loadingContainer.style.display = "none";
       }
     });
@@ -31,18 +32,27 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "login.html";
     });
   }
-  if(dataContainer){
-    fetchData().then(data => {
-      data.forEach(item => {
-        const div = document.createElement('div');
-        div.innerHTML = `<h3>${item.title}</h3><p>${item.content}</p>`;
-        dataContainer.appendChild(div);
+  if (dataContainer) {
+    fetchData().then((data) => {
+      data.forEach((item) => {
+        const figure = document.createElement("figure");
+        figure.id = `figureContainer`;
+        figure.innerHTML = `
+                <h3>${item.title}</h3>
+                <p>Model: ${item.model}</p>
+                <img src="${item.picture}" alt="${item.title}">
+                <h4>Specifications:</h4>
+                <ul>
+                    <li>Engine: ${item.specs.engine}</li>
+                    <li>Horsepower: ${item.specs.horsepower}</li>
+                    <li>0 to 60 mph: ${item.specs["0_to_60"]} seconds</li>
+                    <li>Top Speed: ${item.specs.top_speed} mph</li>
+                </ul>
+            `;
+        dataContainer.appendChild(figure);
       });
-      loadingContainer.style.display = "none";
     });
   }
-
-
 });
 
 const validateLogin = async (username, password) => {
@@ -55,9 +65,8 @@ const validateLogin = async (username, password) => {
   return response;
 };
 
-
 const fetchData = async () => {
-  const response = await fetch('data.json');
+  const response = await fetch("data.json");
   const data = await response.json();
   return data;
-}
+};
