@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadingContainer.style.display = "block";
         setTimeout(() => {
           window.location.href = "index.html";
-        }, 1000);
+        }, 2000);
       } else {
         alert("Foute gegevens! Probeer opnieuw.");
         document.getElementById("username").value = ""; 
@@ -59,28 +59,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Open modal
   if (openModal) {
     openModal.addEventListener("click", () => {
       modalContainer.style.display = "block";
     });
   }
-
-  // Close modal on button click
   if (closeModal) {
     closeModal.addEventListener("click", () => {
       modalContainer.style.display = "none";
     });
   }
-
-  // Close modal on background click
   window.addEventListener("click", (event) => {
     if (event.target === modalContainer) {
       modalContainer.style.display = "none";
     }
   });
-
-  // Submit modal form
   if (modalForm) {
     modalForm.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -93,19 +86,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const top_speed = parseFloat(document.getElementById("top_speed").value);
 
       const pictureFile = pictureInput.files[0];
+     
       if (!pictureFile) {
-        alert("Please select a picture.");
+        alert("Please upload a picture.");
         return;
       }
-      const picturePath = `./images/${pictureFile.name}`;
-
-      // Save image file locally
-      await saveImageLocally(pictureFile, picturePath);
+      
+      const pictureDataUrl = await convertFileToDataUrl(pictureFile);
 
       const formData = {
         title,
         model,
-        picture: picturePath,
+        picture: pictureDataUrl,
         specs: {
           engine,
           horsepower,
@@ -113,45 +105,42 @@ document.addEventListener("DOMContentLoaded", () => {
           top_speed,
         }
       };
-
-      appendDataToJson(formData);
+      console.log(formData);
+     await appendDataToJson(formData);
     });
   }
 });
 
-const saveImageLocally = async (file, path) => {
-  try {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = function () {
-      const base64String = reader.result;
-      const link = document.createElement("a");
-      link.href = base64String;
-      link.download = path.split('/').pop();
-      link.click();
+const convertFileToDataUrl = (file) => {
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      resolve(fileReader.result);
     };
-  } catch (error) {
-    console.error("Error saving image:", error);
-  }
-};
+    fileReader.onerror = (error) => {
+      reject(error);
+    };
+    fileReader.readAsDataURL(file);
+  });
+
+}
 
 const appendDataToJson = async (formData) => {
   try {
-    const response = await fetch("data.json");
-    const data = await response.json();
-
-    const updatedData = [...data, formData];
-
-    await fetch("data.json", {
-      method: "PUT",
+    const response = await fetch("http://localhost:3000/models", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedData),
+      body: JSON.stringify(formData),
     });
 
-    alert("Data submitted successfully!");
-    modalContainer.style.display = "none";
+    if (response.ok) {
+      alert("Data submitted successfully!");
+      modalContainer.style.display = "none";
+    } else {
+      throw new Error("Failed to submit data.");
+    }
   } catch (error) {
     console.error("Error:", error);
     alert("Error occurred while submitting data.");
@@ -171,5 +160,5 @@ const validateLogin = async (username, password) => {
 const fetchData = async () => {
   const response = await fetch("data.json");
   const data = await response.json();
-  return data;
+  return data.models;
 };
