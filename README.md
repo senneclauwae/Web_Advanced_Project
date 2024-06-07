@@ -87,4 +87,4 @@ Een website om modellen van auto's te kunnen oplijsten,deleten.
 
 
 ## Auteur
-- [@Senne Clauwaert](https://github.com/clauwaesenne)
+- [@Senne Clauwaert](https://github.com/senneclauwae)
