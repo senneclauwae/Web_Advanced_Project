@@ -37,7 +37,7 @@ Een website om modellen van auto's te kunnen oplijsten,deleten.
 
 ### Icons
 
--[Fontawesome](https://fontawesome.com/)
+- [Fontawesome](https://fontawesome.com/)
 
 ## Gebruikte bronnen en documentatie
 - [ChatGPT json-server hulp](https://chatgpt.com/share/88abed44-e8a2-49ca-be48-338487aacd5d)
